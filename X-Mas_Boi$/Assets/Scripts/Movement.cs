@@ -6,8 +6,17 @@ public class Movement : MonoBehaviour {
 
     private int moveSpeed = 5;
     private int rotateSpeed = 40;
+    private float minRotation = 270;
+    private float maxRotation = 45;
 
-    private void Start()
+    public float sensitivity;
+    public float limitY;
+
+    private float rotationY;
+    private float rotationX;
+
+
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -21,26 +30,22 @@ public class Movement : MonoBehaviour {
         MovementDirection.y = 0.0f;
         rb.transform.position += MovementDirection * moveSpeed * Time.deltaTime;
 
+        /*
         Vector3 PlayerRotation = new Vector3(0, Input.GetAxis("Mouse X"), 0);
         rb.transform.Rotate(PlayerRotation * Time.deltaTime * rotateSpeed);
 
         Vector3 CameraRotation = new Vector3(-Input.GetAxis("Mouse Y"), 0, 0);
         Camera.main.transform.Rotate(CameraRotation * Time.deltaTime * rotateSpeed);
-        if (Camera.main.transform.rotation.x > 40)
-        {
-            Camera.main.transform.eulerAngles = new Vector3(
-                40,
-                Camera.main.transform.eulerAngles.y,
-                Camera.main.transform.eulerAngles.z
-            );
-        }
-        else if (Camera.main.transform.rotation.x < -50)
-        {
-            Camera.main.transform.eulerAngles = new Vector3(
-                -50,
-                Camera.main.transform.eulerAngles.y + 180,
-                Camera.main.transform.eulerAngles.z
-            );
-        }
+
+        Vector3 currentRotation = Camera.main.transform.localRotation.eulerAngles;
+        currentRotation.x = Mathf.Clamp(currentRotation.x, minRotation, maxRotation);
+        Camera.main.transform.localRotation = Quaternion.Euler(currentRotation);
+        */
+
+        rotationX = Camera.main.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
+        rotationY += Input.GetAxis("Mouse Y") * sensitivity;
+        rotationY = Mathf.Clamp(rotationY, -limitY, limitY);
+        Camera.main.transform.localEulerAngles = new Vector3(-rotationY, 0f, 0f);
+        rb.transform.localEulerAngles += new Vector3(0f, rotationX, 0f);
     }
 }

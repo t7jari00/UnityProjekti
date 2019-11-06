@@ -6,11 +6,15 @@ public class Sooting : MonoBehaviour
 {
     public Camera cm;
     public int laserSpeed;
+    int count;
+    GameObject[] bulletArray = new GameObject[10];
     
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
         {
+
+
             Transform player = GetComponent<Transform>();
             GameObject bullet = (GameObject)Instantiate(Resources.Load("Bullet"));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
