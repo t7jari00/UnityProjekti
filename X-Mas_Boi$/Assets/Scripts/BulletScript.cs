@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    int count;
+    
+    void Start()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-        }
+        
     }
 }

@@ -16,9 +16,6 @@ public class Sooting : MonoBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.transform.position = player.position;
 
-            //Vector3 ShootingDirection = new Vector3(cm.transform.rotation.x, cm.transform.rotation.y, cm.transform.rotation.z);
-            //bulletRb.AddForce(ShootingDirection);
-
             float x = Screen.width / 2f;
             float y = Screen.height / 2f;
 
