@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    int count;
-    
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        GameObject explosion = (GameObject)Instantiate(Resources.Load("Explosion"));
+        explosion.transform.position = gameObject.transform.position;
+        Destroy(gameObject);
     }
 }
