@@ -13,18 +13,25 @@ public class Sooting : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-
-
             Transform player = GetComponent<Transform>();
             GameObject bullet = (GameObject)Instantiate(Resources.Load("Bullet"));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletRb.transform.position = player.position;
+            bullet.transform.position = player.transform.position;
 
-            float x = Screen.width / 2f;
-            float y = Screen.height / 2f;
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward, out hit, Mathf.Infinity))
+            {
+                Vector3 direction = hit.point - bullet.transform.position;
+                bulletRb.velocity = direction.normalized * laserSpeed;
+            }
+            else
+            {
+                float x = Screen.width / 2f;
+                float y = Screen.height / 2f;
+                var ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
+                bulletRb.velocity = ray.direction * laserSpeed;
+            }
 
-            var ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
-            bulletRb.velocity = ray.direction * laserSpeed;
         }
     }
 }
