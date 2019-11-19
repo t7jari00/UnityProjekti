@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-    private int moveSpeed = 5;
-    private int rotateSpeed = 40;
+    public int moveSpeed;
+    public int jumpVelocity;
     private float minRotation = 270;
     private float maxRotation = 45;
 
     public float sensitivity;
     public float limitY;
-
     private float rotationY;
     private float rotationX;
 
+    private bool jumping = false;
+    private float distToGround;
 
     void Start()
     {
+
+        Collider collider = GetComponent<Collider>();
         Cursor.lockState = CursorLockMode.Locked;
+        distToGround = collider.bounds.extents.y;
     }
 
     void Update()
@@ -30,22 +34,20 @@ public class Movement : MonoBehaviour {
         MovementDirection.y = 0.0f;
         rb.transform.position += MovementDirection * moveSpeed * Time.deltaTime;
 
-        /*
-        Vector3 PlayerRotation = new Vector3(0, Input.GetAxis("Mouse X"), 0);
-        rb.transform.Rotate(PlayerRotation * Time.deltaTime * rotateSpeed);
-
-        Vector3 CameraRotation = new Vector3(-Input.GetAxis("Mouse Y"), 0, 0);
-        Camera.main.transform.Rotate(CameraRotation * Time.deltaTime * rotateSpeed);
-
-        Vector3 currentRotation = Camera.main.transform.localRotation.eulerAngles;
-        currentRotation.x = Mathf.Clamp(currentRotation.x, minRotation, maxRotation);
-        Camera.main.transform.localRotation = Quaternion.Euler(currentRotation);
-        */
-
         rotationX = Camera.main.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
         rotationY += Input.GetAxis("Mouse Y") * sensitivity;
         rotationY = Mathf.Clamp(rotationY, -limitY, limitY);
         Camera.main.transform.localEulerAngles = new Vector3(-rotationY, 0f, 0f);
         rb.transform.localEulerAngles += new Vector3(0f, rotationX, 0f);
+
+        if (Input.GetButtonDown("Jump") && grounded())
+        {
+            rb.velocity = new Vector3(0, jumpVelocity, 0);
+        }
+    }
+
+    bool grounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 }
