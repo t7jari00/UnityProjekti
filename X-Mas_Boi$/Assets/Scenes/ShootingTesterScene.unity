@@ -1928,6 +1928,11 @@ PrefabInstance:
       propertyPath: jumpVelocity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6293996929279020201, guid: 484f0a41bccc194478b7c570ec731f06,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6293996929606024023, guid: 484f0a41bccc194478b7c570ec731f06,
         type: 3}
       propertyPath: m_LocalRotation.x
