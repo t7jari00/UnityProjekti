@@ -6,15 +6,11 @@ public class Movement : MonoBehaviour {
 
     public int moveSpeed;
     public int jumpVelocity;
-    private float minRotation = 270;
-    private float maxRotation = 45;
-
     public float sensitivity;
     public float limitY;
+
     private float rotationY;
     private float rotationX;
-
-    private bool jumping = false;
     private float distToGround;
 
     void Start()

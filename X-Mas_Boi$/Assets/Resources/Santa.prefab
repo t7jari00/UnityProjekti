@@ -2117,6 +2117,7 @@ GameObject:
   - component: {fileID: 5233573557996194397}
   - component: {fileID: 998628836974431892}
   - component: {fileID: 998628836974431894}
+  - component: {fileID: -3057862696271130316}
   m_Layer: 10
   m_Name: Santa
   m_TagString: Elf
@@ -2195,3 +2196,16 @@ CapsuleCollider:
   m_Height: 0.0046098186
   m_Direction: 1
   m_Center: {x: -0.00004080385, y: 0.00022962809, z: 0.0021441174}
+--- !u!114 &-3057862696271130316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149690141779654734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3933846de5b0d23448bd1838fe4536ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
