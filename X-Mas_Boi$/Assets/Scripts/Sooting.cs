@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Sooting : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Sooting : MonoBehaviour
     public ParticleSystem flames;
     public GameObject flameHurtBox;
     public Camera cm;
-    public Text ammoText;
+    public TextMeshProUGUI ammoText;
     public int laserSpeed;
 
     public float gunSwitchDelay;
@@ -75,14 +76,39 @@ public class Sooting : MonoBehaviour
             gunSelection = 3;
         }
 
+        if (gunSelection == 1 && Input.GetButtonDown("Fire1"))
+        {
+            if (canShoot && currentClip > 0 && !reloading)
+            {
+                GameObject gunPoint = this.transform.GetChild(0).gameObject;
+                GameObject flash = (GameObject)Instantiate(Resources.Load("muzzleFlash"));
+                flash.transform.eulerAngles = gunPoint.transform.forward;
+                flash.transform.position = gunPoint.transform.position;
+
+
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+                {
+                    if (hit.collider.GetComponent<Enemies>())
+                    {
+                        Enemies enemyToHit = hit.collider.GetComponent<Enemies>();
+                        enemyToHit.TakeDamage(damage);
+                    }
+                }
+
+                currentClip -= 1;
+                ammoText.text = "Ammo: " + currentClip;
+            }
+        }
+
         if (gunSelection == 2 && Input.GetButtonDown("Fire1"))
         {
             if (canShoot && currentClip > 0 && !reloading)
             {
-                Transform player = GetComponent<Transform>();
+                GameObject gunPoint = this.transform.GetChild(0).gameObject;
                 GameObject bullet = (GameObject)Instantiate(Resources.Load("Bullet"));
                 Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-                bullet.transform.position = player.transform.position + (player.transform.forward * 1);
+                bullet.transform.position = gunPoint.transform.position;
 
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
