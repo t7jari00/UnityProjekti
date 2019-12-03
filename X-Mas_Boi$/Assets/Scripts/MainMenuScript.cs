@@ -13,7 +13,9 @@ public class MainMenuScript : MonoBehaviour
     public GameObject secondresButton;
     public GameObject thirdresButton;
     public GameObject backButton;
+    public GameObject slider;
     public Canvas rootCanvas;
+    public AudioSource maintheme;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class MainMenuScript : MonoBehaviour
         secondresButton = rootCanvas.transform.Find("1600x900button").gameObject;
         thirdresButton = rootCanvas.transform.Find("1920x1080button").gameObject;
         backButton = rootCanvas.transform.Find("backButton").gameObject;
+        slider = rootCanvas.transform.Find("Slider").gameObject;
     }
 
     public void StartGame()
@@ -40,6 +43,8 @@ public class MainMenuScript : MonoBehaviour
         secondresButton.gameObject.SetActive(true);
         thirdresButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
+        slider.gameObject.SetActive(true);
+        
     }
 
     public void outofSettings()
@@ -51,6 +56,7 @@ public class MainMenuScript : MonoBehaviour
         secondresButton.gameObject.SetActive(false);
         thirdresButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);
+        slider.gameObject.SetActive(false);
     }
 
     public void firstresolution()
