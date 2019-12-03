@@ -12,7 +12,6 @@ public class Enemies : MonoBehaviour
         if(collision.collider.gameObject.layer == 9)
         {
             TakeDamage(Sooting.damage);
-            Debug.Log(Sooting.damage);
         }
     }
 
@@ -21,16 +20,16 @@ public class Enemies : MonoBehaviour
         if (other.gameObject.layer == 9)
         {
             TakeDamage(Sooting.damage);
-            Debug.Log(Sooting.damage);
         }
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if(health <= 0)
         {
             Destroy(gameObject);
         }
+        Debug.Log(Sooting.damage);
     }
 }
