@@ -14,48 +14,42 @@ public class Movement : MonoBehaviour {
     private float rotationX;
     private float distToGround;
     private CharacterController controller;
+    private Vector3 velocity;
 
     void Start()
     {
-        //Collider collider = GetComponent<Collider>();
+        Collider collider = GetComponent<Collider>();
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        //distToGround = collider.bounds.extents.y;
+        distToGround = collider.bounds.extents.y;
     }
 
     void Update()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        /*
         Vector3 MovementDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        MovementDirection = Camera.main.transform.TransformDirection(MovementDirection);
-        MovementDirection.y = 0.0f;
-        rb.transform.position += MovementDirection * moveSpeed * Time.deltaTime;
-        */
-        Vector3 MovementDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        MovementDirection = Camera.main.transform.TransformDirection(MovementDirection);
-        MovementDirection.y = 0.0f;
+        MovementDirection = transform.TransformDirection(MovementDirection);
         Vector3 moveDirecton = MovementDirection * moveSpeed;
-        Vector3 velocity = new Vector3(moveDirecton.x, 0, moveDirecton.z);
-        if (controller.isGrounded)
+        velocity = new Vector3(moveDirecton.x, velocity.y, moveDirecton.z);
+        if (Grounded())
         {
             velocity.y = 0;
-        }else
+        }
+        else
         {
             velocity.y -= 25f * Time.deltaTime;
         }
-        controller.Move(velocity * Time.deltaTime);
 
         rotationX = Camera.main.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
         rotationY += Input.GetAxis("Mouse Y") * sensitivity;
         rotationY = Mathf.Clamp(rotationY, -limitY, limitY);
         Camera.main.transform.localEulerAngles = new Vector3(-rotationY, 0f, 0f);
-        rb.transform.localEulerAngles += new Vector3(0f, rotationX, 0f);
+        transform.localEulerAngles += new Vector3(0f, rotationX, 0f);
 
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        if (Input.GetButtonDown("Jump") && Grounded())
         {
-            rb.velocity = new Vector3(0, jumpVelocity, 0);
+            velocity.y = jumpVelocity;
         }
+        controller.Move(velocity * Time.deltaTime);
 
         RaycastHit hit;
         Vector3 direction = Camera.main.transform.position - this.transform.position;
@@ -70,8 +64,8 @@ public class Movement : MonoBehaviour {
     }
     
 
-    /*bool grounded()
+    private bool Grounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
-    }*/
+    }
 }
