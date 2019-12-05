@@ -25,7 +25,8 @@ public class Audiovolume : MonoBehaviour
 
     void OnGUI()
     {
-        menuaudio.volume = slider.value;
+        //menuaudio.volume = slider.value;
+        AudioListener.volume = slider.value;
         volumepercentage = slider.value * 100;
         volumetext.text = "Master volume: " + System.Math.Round(volumepercentage, 0) + "%";
     }
