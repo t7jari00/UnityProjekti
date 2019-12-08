@@ -65,6 +65,7 @@
     <Compile Include="Assets\com\heparo\terrain\toolkit\scripts\TerrainToolkit.cs" />
     <Compile Include="Assets\Laterns and candles\scripts\CameraFacing.cs" />
     <Compile Include="Assets\Laterns and candles\scripts\ExtendedFlycam.cs" />
+    <Compile Include="Assets\Scripts\AnimationStuff.cs" />
     <Compile Include="Assets\Scripts\Audiovolume.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
     <Compile Include="Assets\Scripts\Enemies.cs" />

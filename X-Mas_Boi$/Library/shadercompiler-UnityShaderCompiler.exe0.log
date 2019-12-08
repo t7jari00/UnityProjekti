@@ -168,3 +168,6 @@ Cmd: preprocess
   insize=733 outsize=342 ok=1
 Cmd: preprocess
   insize=5085 outsize=789 ok=1
+Unhandled exception: Protocol error - unexpected end of data (did the Editor crash?)
+
+Quitting shader compiler process
