@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class MainMenuScript : MonoBehaviour
@@ -15,6 +14,7 @@ public class MainMenuScript : MonoBehaviour
     public GameObject backButton;
     public GameObject slider;
     public Canvas rootCanvas;
+    public Canvas cutsceneCanvas;
     public AudioSource maintheme;
 
     void Start()
@@ -31,7 +31,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("ShootingTesterScene");
+        rootCanvas.gameObject.SetActive(false);
+        cutsceneCanvas.gameObject.SetActive(true);
     }
 
     public void Settings()
